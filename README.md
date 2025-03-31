@@ -2,24 +2,24 @@
 I want to create an API which we can control the gate from device
 
 ## To check the status of gate
-http://localhost/newquotation/readStatus.php
+http://localhost/gateControl/readStatus.php
 
 0 - gate is closed
 1 - gate is opened
 
 ## Raspabery pi command to close the gate
 
-http://localhost/newquotation/closeGate.php
+http://localhost/gateControl/closeGate.php
 
 ## Raspabery pi command to open the gate
 
-http://localhost/newquotation/openGate.php
+http://localhost/gateControl/openGate.php
 
 ## Raspaberry pi command to check the status of gate
-http://localhost/newquotation/readStatus.php
+http://localhost/gateControl/readStatus.php
 
 ## A test interface where we can manually open and close the gate
-http://localhost/newquotation/controlGate.php
+http://localhost/gateControl/controlGate.php
 
 
 The command is actually simply write a file gateStatus.txt to either 0 or 1
