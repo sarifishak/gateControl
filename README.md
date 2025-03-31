@@ -25,7 +25,7 @@ http://localhost/newquotation/controlGate.php
 The command is actually simply write a file gateStatus.txt to either 0 or 1
 
 The raspaberry will check if ZERO, it will poll it again every 1 seconds.
-But, once the value is ONE, it send command to open the date, wait for 5 seconds, then
+But, once the value is ONE, it send command to open the gate, wait for 5 seconds, then
   it will give command to close the gate (which is to write the file to 0 again)
 Then, it will back to poll every 1 seconds, if the file is changed to 1 again.
 
