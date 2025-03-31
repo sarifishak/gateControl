@@ -15,6 +15,9 @@ http://localhost/newquotation/closeGate.php
 
 http://localhost/newquotation/openGate.php
 
+## Raspaberry pi command to check the status of gate
+http://localhost/newquotation/readStatus.php
+
 ## A test interface where we can manually open and close the gate
 http://localhost/newquotation/controlGate.php
 
