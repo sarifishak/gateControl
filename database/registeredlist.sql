@@ -26,7 +26,9 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `registeredlist`
 --
-DROP TABLE `registeredlist`;
+
+DROP TABLE IF EXISTS `registeredlist`;
+
 CREATE TABLE `registeredlist` (
   `id` int(3) NOT NULL,
   `name` varchar(200) NOT NULL,
