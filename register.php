@@ -115,6 +115,8 @@ if(isset($_POST['submitButton'])) {
         
         // Execute the statement
         $stmt->execute();
+
+        include 'openGate.php';
         
         // Success message
         $success = "Registration successful!";
