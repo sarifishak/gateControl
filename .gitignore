@@ -1,0 +1,9 @@
+# ignore ALL .log files
+*.log
+# ignore ALL .inc files
+*.inc
+# ignore ALL .code-workspace files
+*.code-workspace
+
+# ignore ALL files in ANY directory named pictureFiles
+pictureFiles/
