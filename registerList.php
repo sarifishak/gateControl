@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+include("database.inc");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +62,7 @@ include("database.php");
                     <th>Destination</th>
                     <th>Alamat</th>
                     <th>No. Kenderaan</th>
+                    <th>Date Registered</th>
                     <th>Gambar IC</th>
                 </tr>
             </thead>
@@ -80,6 +81,7 @@ include("database.php");
                             <td><?= htmlspecialchars($row["destination"]) ?></td>
                             <td><?= htmlspecialchars($row["alamat"]) ?></td>
                             <td><?= htmlspecialchars($row["noKenderaan"]) ?></td>
+                            <td><?= htmlspecialchars($row["createdDate"]) ?></td>
                             <td>
                                 <a href="<?= htmlspecialchars($row["gambarDir"]) ?>" target="_blank" rel="noopener noreferrer">
                                     View Document
