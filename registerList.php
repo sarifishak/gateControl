@@ -63,7 +63,7 @@ include("database.inc");
                     <th>Alamat</th>
                     <th>No. Kenderaan</th>
                     <th>Date Registered</th>
-                    <th>Gambar IC</th>
+                    <!-- <th>Gambar IC</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -82,11 +82,11 @@ include("database.inc");
                             <td><?= htmlspecialchars($row["alamat"]) ?></td>
                             <td><?= htmlspecialchars($row["noKenderaan"]) ?></td>
                             <td><?= htmlspecialchars($row["createdDate"]) ?></td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= htmlspecialchars($row["gambarDir"]) ?>" target="_blank" rel="noopener noreferrer">
                                     View Document
                                 </a>
-                            </td>
+                            </td> -->
                         </tr>
                 <?php
                         $num++;
