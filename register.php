@@ -69,15 +69,17 @@ if(isset($_POST['submitButton'])) {
         if (!file_exists($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
-        
+        $targetFile = $targetDir . uniqid();
+        /*
         $originalFileName = basename($_FILES['gambarKenderaan']['name']);
         $fileType = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
         $fileName = uniqid() . '_' . $originalFileName;
-        $targetFile = $targetDir . $fileName;
+        $targetFile = $targetDir . $fileName;*/
         
         date_default_timezone_set('Asia/Kuala_Lumpur');
         $createdDate = date("Y-m-d H:i:s");
         
+        /*
         // Validate file upload
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
         if(!in_array($fileType, $allowedTypes)) {
@@ -98,7 +100,8 @@ if(isset($_POST['submitButton'])) {
                 throw new Exception("Failed to upload file.");
             }
         }
-        
+        */
+
         // Prepare SQL with PDO
         $sql = "INSERT INTO registeredlist (name, destination, alamat, noKenderaan, gambarDir, createdDate) 
                 VALUES (:name, :destination, :alamat, :noKenderaan, :gambarDir, :createdDate)";
@@ -155,8 +158,11 @@ if(isset($_POST['submitButton'])) {
             </div>
         <?php endif; ?>
         <form action="register.php" method="post" enctype="multipart/form-data">
-            <label>Full name</label>
+            <label>Nama Pelawat</label>
             <input name="fName" type="text" required>
+            
+            <label>Nombor Kenderaan</label>
+            <input name="noKenderaan" type="text" required>
             
             <label>Alamat Kediaman penerima</label>
             <select name="destination" required>
@@ -168,13 +174,10 @@ if(isset($_POST['submitButton'])) {
             
             <label>No. Alamat Penuh Kediaman</label>
             <input name="alamat" type="text" required>
-            
-            <label>Nombor Kenderaan</label>
-            <input name="noKenderaan" type="text" required>
-            
+            <!-- 
             <label>Gambar Kad Pengenalan</label>
             <input name="gambarKenderaan" type="file" required accept="image/*,.pdf">
-            <small>Note: Images will be automatically compressed to under 100KB</small>
+            <small>Note: Images will be automatically compressed to under 100KB</small> -->
             
             <button name="submitButton" type="submit">Submit</button>
         </form>
