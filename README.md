@@ -1,4 +1,4 @@
-# gateControl
+# gateControlyayayayayaya
 I want to create an API which we can control the gate from device
 
 ## To check the status of gate
