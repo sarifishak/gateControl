@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+include("database.inc");
 
 $name = $_GET['name'] ?? '';
 if ($name) {

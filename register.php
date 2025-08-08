@@ -123,7 +123,7 @@ if(isset($_POST['submitButton'])) {
         
         // Success message
         $success = "Registration successful!";
-        
+        header("Location: register.php?success=" . urlencode($success));
     } catch (Exception $e) {
         // Handle errors
         $error = "Error: " . $e->getMessage();
@@ -147,9 +147,9 @@ if(isset($_POST['submitButton'])) {
 <body>
     <div class="container">
         <h1>Register Form</h1>
-        <?php if(isset($success)): ?>
-            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-                <?= htmlspecialchars($success) ?>
+        <?php if(isset($_GET['success'])): ?>
+            <div class="success-message" style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                <?= htmlspecialchars($_GET['success']) ?>
             </div>
         <?php endif; ?>
         <?php if(isset($error)): ?>
@@ -157,23 +157,18 @@ if(isset($_POST['submitButton'])) {
                 <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
-        <form action="register.php" method="post" enctype="multipart/form-data">
-            <label>Nama Pelawat</label>
-            <input name="fName" type="text" required>
-            
+        <form id="myForm" action="register.php" method="post" enctype="multipart/form-data">
             <label>Nombor Kenderaan</label>
-            <input name="noKenderaan" type="text" required>
+            <input autocomplete="off" id="noKenderaan" list="suggestionBox" name="noKenderaan" type="text" required>
+            <datalist id="suggestionBox"></datalist>
+            <label>Nama Pelawat</label>
+            <input autocomplete="off" id="nameBox" name="fName" type="text" required>
             
-            <label>Alamat Kediaman penerima</label>
-            <select name="destination" required>
-                <option value="">Select an option</option>
-                <option value="TERES SEKSYEN 9">TERES SEKSYEN 9</option>
-                <option value="RAJAWALI">RAJAWALI</option>
-                <option value="MERPATI">MERPATI</option>
-            </select>
+            <label>Nama Penghuni</label>
+            <input autocomplete="off" id="destinationBox" name="destination" type="text" required>
             
-            <label>No. Alamat Penuh Kediaman</label>
-            <input name="alamat" type="text" required>
+            <label>No. Alamat Penuh Kediaman Penghuni</label>
+            <input autocomplete="off" id="alamatBox" name="alamat" type="text" required>
             <!-- 
             <label>Gambar Kad Pengenalan</label>
             <input name="gambarKenderaan" type="file" required accept="image/*,.pdf">
@@ -182,5 +177,51 @@ if(isset($_POST['submitButton'])) {
             <button name="submitButton" type="submit">Submit</button>
         </form>
     </div>
+    <script>
+    setTimeout(() => {
+        const msg = document.querySelector('.success-message');
+        if (msg) msg.style.display = 'none';
+    }, 5000); // Hide after 5 seconds
+
+    let suggestionBox = document.getElementById("suggestionBox");
+    let noKenderaan = document.getElementById("noKenderaan");
+    let nameBox = document.getElementById("nameBox");
+    let destinationBox = document.getElementById("destinationBox");
+    let alamatBox = document.getElementById("alamatBox");
+    let myForm=document.getElementById("myForm");
+    noKenderaan.addEventListener("input", function () {
+        
+        let query = this.value;
+        if (query.length === 0) {
+            suggestionBox.innerHTML = "";
+            myForm.reset();
+            return;
+        }
+
+        
+        fetch("suggestions.php?q=" + encodeURIComponent(query))
+            .then(response => response.json())
+            .then(data => {
+                suggestionBox.innerHTML = "";
+                data.forEach(eachdata => {
+                    let option = document.createElement("option");
+                    option.value = eachdata.noKenderaan;
+                    suggestionBox.appendChild(option);
+                });
+            });
+
+        
+        fetch("fillForms.php?name=" + encodeURIComponent(query))
+            .then(response2 => response2.json())
+            .then(data2 => {
+                if (data2 && data2.name) {
+                    nameBox.value = data2.name;
+                    destinationBox.value = data2.destination;
+                    alamatBox.value = data2.alamat;
+                }
+            });
+    });
+
+    </script>
 </body>
 </html>

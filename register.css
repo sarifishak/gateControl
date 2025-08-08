@@ -21,7 +21,7 @@ label::after {
 .container {
     background-color: white;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 30px;
     border: 3px solid black;
     border-radius: 15px;
@@ -41,6 +41,30 @@ form {
     flex-direction: column;
     gap: 20px;
 }
+.myForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* allows wrapping on small screens */
+    margin: 10px;
+    font-size: 1em; /* restore readable size */
+}
+
+.myForm label,
+.myForm input,
+.myForm button {
+    width: auto;
+    margin: 5px 0;
+}
+/* Optional: Push the button group to the right even when wrapping occurs */
+.buttonGroup {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
 
 input, select {
     padding: 12px;

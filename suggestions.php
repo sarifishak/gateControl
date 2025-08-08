@@ -1,5 +1,5 @@
 <?php
-include("database.php");
+include("database.inc");
 $q = $_GET['q'] ?? '';
 if ($q) {
     $stmt = $pdo->prepare("SELECT noKenderaan FROM registeredlist WHERE noKenderaan LIKE LOWER(?) LIMIT 5");
