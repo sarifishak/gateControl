@@ -8,6 +8,7 @@ include("database.inc");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered List</title>
     <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -54,6 +55,29 @@ include("database.inc");
 <body>
     <div class="container">
         <h1>Registered List</h1>
+        <?php
+        // Keep the values if form is submitted
+        $startVal = isset($_POST['startTime']) ? $_POST['startTime'] : '';
+        $endVal = isset($_POST['endTime']) ? $_POST['endTime'] : '';
+        ?>
+        <form class="myForm" action="registerList.php" method="post" class="filterBox">
+            <div>
+                <label>Start: </label>
+                <input type="datetime-local" name="startTime" value="<?= htmlspecialchars($startVal) ?>" required>
+            </div>
+            <div>
+                <label>End: </label>
+                <input type="datetime-local" name="endTime" value="<?= htmlspecialchars($endVal) ?>" required>
+            </div>
+            <div>
+                <button type="button" onclick="window.location.href = window.location.pathname">Reset</button>
+                <button name="filterButton" type="submit">
+                    <i class="fa-solid fa-filter" style="margin:5px 10px;"></i>Filter
+                </button>
+            </div>
+        </form>
+
+        
         <table id="myTable" class="display">
             <thead>
                 <tr>
@@ -72,6 +96,16 @@ include("database.inc");
                     $sql = "SELECT * FROM registeredlist ORDER BY id DESC";
                     $stmt = $pdo->query($sql);
                     $num = 1;
+                    if(isset($_POST['filterButton'])){
+                        $start = date("Y-m-d H:i:s", strtotime($_POST['startTime']));
+                        $end = date("Y-m-d H:i:s", strtotime($_POST['endTime']));
+
+                        $sql = "SELECT * FROM registeredlist WHERE createdDate BETWEEN :start AND :end";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':start', $start);
+                        $stmt->bindParam(':end', $end);
+                        $stmt->execute();
+                    }
                     
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
