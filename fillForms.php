@@ -1,4 +1,4 @@
-BY <?php
+<?php
 include("database.inc");
 
 $name = $_GET['name'] ?? '';
