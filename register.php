@@ -214,7 +214,6 @@ if(isset($_POST['submitButton'])) {
         fetch("fillForms.php?name=" + encodeURIComponent(query))
             .then(response2 => response2.json())
             .then(data2 => {
-                console.log(data2);
                 if (data2 && data2.name) {
                     nameBox.value = data2.name;
                     destinationBox.value = data2.destination;
