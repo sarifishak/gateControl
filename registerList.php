@@ -82,8 +82,8 @@ include("database.inc");
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Destination</th>
+                    <th>Nama Pelawat</th>
+                    <th>Penghuni</th>
                     <th>Alamat</th>
                     <th>No. Kenderaan</th>
                     <th>Date Registered</th>
